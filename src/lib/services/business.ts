@@ -55,6 +55,12 @@ export interface Business {
   funding_option_shown: boolean;
   escrow_balance: number;
   total_raised: number;
+  founder_balance: number;
+  treasury_shares: number;
+  current_price?: number;
+  last_trade_at?: string;
+  volume_24h: number;
+  trades_count: number;
   milestone_reached_at?: string;
   refunded_at?: string;
   created_at: string;
@@ -114,6 +120,14 @@ interface BusinessStore {
   updates: BusinessUpdate[];
   trustEvents: TrustScoreEvent[];
   follows: Follow[];
+  holdings: Array<{
+    id: string;
+    user_id: string;
+    business_id: string;
+    shares: number;
+    avg_buy_price: number;
+    updated_at: string;
+  }>;
 
   // Founder actions
   upgradeToFounder: () => { success: boolean; error?: string };
@@ -169,6 +183,7 @@ export const useBusinessStore = create<BusinessStore>()(
       updates: [],
       trustEvents: [],
       follows: [],
+      holdings: [],
 
       upgradeToFounder: () => {
         const { user, updateUser } = useAuthStore.getState();
@@ -232,6 +247,10 @@ export const useBusinessStore = create<BusinessStore>()(
           funding_option_shown: false,
           escrow_balance: 0,
           total_raised: 0,
+          founder_balance: 0,
+          treasury_shares: 0,
+          volume_24h: 0,
+          trades_count: 0,
           created_at: now,
           updated_at: now,
         };

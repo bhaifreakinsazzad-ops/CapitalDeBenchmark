@@ -96,7 +96,7 @@ supabase/
 | 2 | Wallet, KYC, Recharge, Withdrawals ✅ |
 | 3 | Business Listing, Market, Verification, Updates ✅ |
 | 4 | Primary Investment, Share Receipts, Escrow, Portfolio ✅ |
-| 5 | Trading Exchange — Order book, matching engine, tradable receipts |
+| 5 | Secondary Market, Order Book, Buyback, Market Maker ✅ |
 | 6 | Advanced KYC — Enhanced verification, compliance |
 | 7 | Comments & Social — Update comments, interactions |
 | 8 | Admin Operations — Ads, reports, advanced analytics |
@@ -264,6 +264,76 @@ supabase/
 6. Verify: milestone reached (total ৳1000 = target); escrow_balance = 0; founder_balance = ৳1000
 7. As founder: request payout of ৳500 → admin approves → mark paid
 8. Verify: business.founder_balance = ৳500; founder receives notification
+
+## Phase 5 Features
+
+### Secondary Market Trading
+- Buy and sell shares between users on the secondary market
+- Limit orders with price-time priority matching engine
+- Market orders using last traded price
+- Real-time order book showing top 5 bids and asks
+- Live price ticker with 24h stats (high, low, volume, change %)
+
+### Order Management
+- Place buy/sell orders with live cost preview
+- Cancel open orders anytime (full escrow refund)
+- View open orders, trade history, and receipts
+- Partial fills supported with automatic matching
+
+### Price Discovery
+- Primary price frozen at business verification
+- Secondary price = last traded price
+- Price collapse detection (-3 trust if >50% drop from primary)
+- 24h volume tracking per business
+
+### Receipt Transfer System
+- FIFO consumption of seller's receipts on trade execution
+- Receipt splitting when partial quantities sold
+- Full audit trail of all receipt transfers
+- Buyer receives new receipt for purchased shares
+
+### Founder Buyback
+- Founders can buy back their own business shares
+- Uses founder_balance (raised funds)
+- Shares go to treasury_shares (not re-sold)
+- Admin-visible buyback orders and trades
+
+### Market Maker (Admin)
+- Admin can place orders to provide liquidity
+- Separate market maker order tracking
+- Admin can cancel any user's order (safety valve)
+- Full trade reversal capability
+
+### Portfolio Enhancements
+- Three tabs: Holdings | Open Orders | History
+- Sell button on each holding card
+- Real-time P/L tracking with current market price
+- Ownership percentage display
+
+### Admin Trading Controls
+- View all orders with filters (status, type, business)
+- View all trades with full details
+- Cancel any open order
+- Market maker interface for liquidity provision
+- Trade reversal for safety/compliance
+
+### Matching Engine Rules
+- Price-time priority: best price first, then earliest order
+- Buy orders sorted: price DESC, time ASC
+- Sell orders sorted: price ASC, time ASC
+- Trade price = price of the earlier (resting) order
+- Self-trade prevention enforced
+- T+0 instant settlement
+
+### Manual E2E Test Script (Phase 5)
+1. User A holds 50 shares from primary investment
+2. User B places buy order: 10 shares @ ৳12
+3. User A places sell order: 10 shares @ ৳12
+4. Verify: orders match, trade executes, B receives receipt
+5. Admin places market maker buy: 5 shares @ ৳11
+6. User C sells 5 shares @ ৳10 → matches with MM order at ৳11
+7. Founder places buyback: 20 shares @ ৳13 → treasury increases
+8. Verify: order book updates, trade history correct, receipts transferred
 
 ---
 

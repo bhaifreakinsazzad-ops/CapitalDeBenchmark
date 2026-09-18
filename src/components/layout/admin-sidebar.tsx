@@ -1,5 +1,5 @@
 import { NavLink, useNavigate } from 'react-router-dom';
-import { LayoutDashboard, Shield, Users, CreditCard, ArrowDownCircle, ArrowUpCircle, FileText, ClipboardList, LogOut, DollarSign, TrendingUp, Target } from 'lucide-react';
+import { LayoutDashboard, Shield, Users, CreditCard, ArrowDownCircle, ArrowUpCircle, FileText, ClipboardList, LogOut, DollarSign, TrendingUp, Target, BarChart3 } from 'lucide-react';
 import { BrandMark } from './brand-mark';
 import { useAuthStore } from '../../store';
 import bnMessages from '../../messages/bn.json';
@@ -21,6 +21,9 @@ export function AdminSidebar() {
     { to: '/admin/release', icon: DollarSign, label: lang === 'bn' ? 'ফান্ড রিলিজ' : 'Fund Release' },
     { to: '/admin/investments', icon: TrendingUp, label: lang === 'bn' ? 'বিনিয়োগ' : 'Investments' },
     { to: '/admin/milestone', icon: Target, label: lang === 'bn' ? 'মাইলস্টোন' : 'Milestone' },
+    { to: '/admin/orders', icon: BarChart3, label: lang === 'bn' ? 'অর্ডার' : 'Orders' },
+    { to: '/admin/trades', icon: TrendingUp, label: lang === 'bn' ? 'লেনদেন' : 'Trades' },
+    { to: '/admin/market-maker', icon: BarChart3, label: lang === 'bn' ? 'মার্কেট মেকার' : 'Market Maker' },
     { to: '/admin/updates', icon: FileText, label: t.admin.updates },
     { to: '/admin/audit', icon: ClipboardList, label: t.admin.audit },
   ];

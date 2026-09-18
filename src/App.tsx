@@ -30,6 +30,7 @@ import { ManageBusinessPage } from './pages/mybiz/ManageBusinessPage';
 import { PostUpdatePage } from './pages/mybiz/PostUpdatePage';
 import { NotificationsPage } from './pages/NotificationsPage';
 import { InvestPage } from './pages/invest/InvestPage';
+import { TradingPage } from './pages/TradingPage';
 
 // Admin Pages
 import {
@@ -45,6 +46,7 @@ import {
 import { AdminReleasePage } from './pages/AdminReleasePage';
 import { AdminInvestmentsPage } from './pages/AdminInvestmentsPage';
 import { AdminMilestonePage } from './pages/AdminMilestonePage';
+import { AdminOrdersPage, AdminTradesPage, AdminMarketMakerPage } from './pages/AdminTradingPages';
 
 // Protected route for authenticated users
 function AuthenticatedLayout() {
@@ -139,6 +141,7 @@ function App() {
           <Route path="/mybiz/:id/updates/new" element={<PostUpdatePage />} />
           <Route path="/notifications" element={<NotificationsPage />} />
           <Route path="/invest/:slug" element={<InvestPage />} />
+          <Route path="/trade/:slug" element={<TradingPage />} />
         </Route>
 
         {/* Admin routes */}
@@ -152,6 +155,9 @@ function App() {
           <Route path="/admin/release" element={<AdminReleasePage />} />
           <Route path="/admin/investments" element={<AdminInvestmentsPage />} />
           <Route path="/admin/milestone" element={<AdminMilestonePage />} />
+          <Route path="/admin/orders" element={<AdminOrdersPage />} />
+          <Route path="/admin/trades" element={<AdminTradesPage />} />
+          <Route path="/admin/market-maker" element={<AdminMarketMakerPage />} />
           <Route path="/admin/updates" element={<AdminUpdatesPage />} />
           <Route path="/admin/audit" element={<AdminAuditPage />} />
         </Route>

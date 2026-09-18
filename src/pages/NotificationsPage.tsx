@@ -121,6 +121,21 @@ export function NotificationsPage() {
         en: `New follower`,
         icon: '👥',
       },
+      order_placed: {
+        bn: `${payload.type === 'buy' ? 'কেনার' : 'বিক্রয়ের'} অর্ডার দেওয়া হয়েছে: ${payload.shares} শেয়ার @ ৳${payload.price}`,
+        en: `${payload.type} order placed: ${payload.shares} shares @ ৳${payload.price}`,
+        icon: '📊',
+      },
+      order_filled: {
+        bn: `আপনার অর্ডার পূরণ হয়েছে: ${payload.shares} শেয়ার @ ৳${payload.price} (${payload.business_name})`,
+        en: `Your order filled: ${payload.shares} shares @ ৳${payload.price} (${payload.business_name})`,
+        icon: '✅',
+      },
+      order_cancelled: {
+        bn: `আপনার অর্ডার বাতিল করা হয়েছে`,
+        en: `Your order has been cancelled`,
+        icon: '❌',
+      },
     };
 
     return contents[type] || { bn: type, en: type, icon: '🔔' };
