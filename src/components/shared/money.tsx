@@ -1,4 +1,4 @@
-import { toBanglaNumeral } from '../../lib/utils';
+import { formatMoney } from '../../lib/format';
 
 interface MoneyProps {
   amount: number;
@@ -7,17 +7,12 @@ interface MoneyProps {
 }
 
 export function Money({ amount, lang = 'bn', className = '' }: MoneyProps) {
-  const formatted = new Intl.NumberFormat('en-BD', {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
-  }).format(amount);
-
-  const display = lang === 'bn' ? toBanglaNumeral(formatted) : formatted;
+  const display = formatMoney(amount, lang);
 
   return (
     <span className={`tabular-nums ${className}`}>
-      <span className="text-brand-accent font-medium">৳</span>
-      {display}
+      <span className="text-brand-accent font-medium">{display.slice(0, 1)}</span>
+      {display.slice(1)}
     </span>
   );
 }

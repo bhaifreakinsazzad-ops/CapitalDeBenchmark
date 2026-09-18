@@ -1,4 +1,4 @@
-import { toBanglaNumeral } from '../../lib/utils';
+import { formatNumber } from '../../lib/format';
 
 interface BanglaNumberProps {
   value: string | number;
@@ -7,6 +7,6 @@ interface BanglaNumberProps {
 }
 
 export function BanglaNumber({ value, lang = 'bn', className = '' }: BanglaNumberProps) {
-  const display = lang === 'bn' ? toBanglaNumeral(String(value)) : String(value);
+  const display = formatNumber(value, lang);
   return <span className={`tabular-nums ${className}`}>{display}</span>;
 }
