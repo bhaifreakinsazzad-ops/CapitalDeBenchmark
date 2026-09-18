@@ -6,6 +6,7 @@ import { useAuthStore } from './store';
 import { TopBar } from './components/layout/top-bar';
 import { BottomNav } from './components/layout/bottom-nav';
 import { AdminSidebar } from './components/layout/admin-sidebar';
+import { AnnouncementBanner } from './components/AnnouncementBanner';
 
 // Public Pages
 import { LandingPage } from './pages/LandingPage';
@@ -16,6 +17,8 @@ import { MarketPage } from './pages/MarketPage';
 import { BusinessDetailPage } from './pages/BusinessDetailPage';
 import { LearnPage } from './pages/LearnPage';
 import { FeedPage } from './pages/FeedPage';
+import { SearchPage } from './pages/SearchPage';
+import { FounderProfilePage } from './pages/FounderProfilePage';
 
 // App Pages
 import { DashboardPage } from './pages/DashboardPage';
@@ -31,6 +34,7 @@ import { PostUpdatePage } from './pages/mybiz/PostUpdatePage';
 import { NotificationsPage } from './pages/NotificationsPage';
 import { InvestPage } from './pages/invest/InvestPage';
 import { TradingPage } from './pages/TradingPage';
+import { NotificationSettingsPage } from './pages/NotificationSettingsPage';
 
 // Admin Pages
 import {
@@ -47,6 +51,7 @@ import { AdminReleasePage } from './pages/AdminReleasePage';
 import { AdminInvestmentsPage } from './pages/AdminInvestmentsPage';
 import { AdminMilestonePage } from './pages/AdminMilestonePage';
 import { AdminOrdersPage, AdminTradesPage, AdminMarketMakerPage } from './pages/AdminTradingPages';
+import { AdminReportsPage, AdminCommentsPage, AdminAnnouncementsPage } from './pages/AdminSocialPages';
 
 // Protected route for authenticated users
 function AuthenticatedLayout() {
@@ -65,6 +70,9 @@ function AuthenticatedLayout() {
     <div className="min-h-screen flex flex-col">
       <TopBar />
       <main className="flex-1">
+        <div className="max-w-7xl mx-auto px-4 py-4">
+          <AnnouncementBanner />
+        </div>
         <Outlet />
       </main>
       <BottomNav />
@@ -108,7 +116,14 @@ function AdminLayout() {
 }
 
 function PublicLayout() {
-  return <Outlet />;
+  return (
+    <>
+      <div className="max-w-7xl mx-auto px-4 py-4">
+        <AnnouncementBanner />
+      </div>
+      <Outlet />
+    </>
+  );
 }
 
 function App() {
@@ -122,6 +137,8 @@ function App() {
           <Route path="/biz/:slug" element={<BusinessDetailPage />} />
           <Route path="/learn" element={<LearnPage />} />
           <Route path="/feed" element={<FeedPage />} />
+          <Route path="/search" element={<SearchPage />} />
+          <Route path="/founder/:id" element={<FounderProfilePage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/onboarding" element={<OnboardingPage />} />
@@ -140,6 +157,7 @@ function App() {
           <Route path="/mybiz/:id" element={<ManageBusinessPage />} />
           <Route path="/mybiz/:id/updates/new" element={<PostUpdatePage />} />
           <Route path="/notifications" element={<NotificationsPage />} />
+          <Route path="/settings/notifications" element={<NotificationSettingsPage />} />
           <Route path="/invest/:slug" element={<InvestPage />} />
           <Route path="/trade/:slug" element={<TradingPage />} />
         </Route>
@@ -158,6 +176,9 @@ function App() {
           <Route path="/admin/orders" element={<AdminOrdersPage />} />
           <Route path="/admin/trades" element={<AdminTradesPage />} />
           <Route path="/admin/market-maker" element={<AdminMarketMakerPage />} />
+          <Route path="/admin/reports" element={<AdminReportsPage />} />
+          <Route path="/admin/comments" element={<AdminCommentsPage />} />
+          <Route path="/admin/announcements" element={<AdminAnnouncementsPage />} />
           <Route path="/admin/updates" element={<AdminUpdatesPage />} />
           <Route path="/admin/audit" element={<AdminAuditPage />} />
         </Route>

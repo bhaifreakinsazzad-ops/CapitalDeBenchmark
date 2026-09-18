@@ -97,8 +97,8 @@ supabase/
 | 3 | Business Listing, Market, Verification, Updates ✅ |
 | 4 | Primary Investment, Share Receipts, Escrow, Portfolio ✅ |
 | 5 | Secondary Market, Order Book, Buyback, Market Maker ✅ |
-| 6 | Advanced KYC — Enhanced verification, compliance |
-| 7 | Comments & Social — Update comments, interactions |
+| 6 | Comments, Moderation, Search, Announcements ✅ |
+| 7 | Advanced KYC — Enhanced verification, compliance |
 | 8 | Admin Operations — Ads, reports, advanced analytics |
 | 9 | Launch Polish — PWA, performance, legal pages |
 
@@ -334,6 +334,78 @@ supabase/
 6. User C sells 5 shares @ ৳10 → matches with MM order at ৳11
 7. Founder places buyback: 20 shares @ ৳13 → treasury increases
 8. Verify: order book updates, trade history correct, receipts transferred
+
+## Phase 6 Features
+
+### Comments & Social Interactions
+- Comment on approved business updates (KYC-verified users only)
+- Reply to comments (one level of threading)
+- Like comments and updates
+- Comment anonymization: "Investor #ABC" / "Founder #XYZ"
+- Comment moderation: hide, unhide, delete by admins
+- Comment bans (per-business, temporary or permanent)
+
+### Notification Preferences
+- Granular control over notification categories
+- Toggle wallet, KYC, investment, trading, follow, comment, platform announcements
+- Saved per-user in notification_prefs table
+- Respected by notification system
+
+### Content Reports & Moderation
+- Report comments, updates, or businesses
+- Reasons: spam, abuse, misinformation, fraud, other
+- Admin review queue with action options
+- Actions: dismiss, hide comment, delete comment, warn author, ban author, suspend business
+
+### Founder Public Profiles
+- Public profile page at /founder/[id]
+- Shows anonymized name "Founder #XYZ"
+- Displays active ventures
+- Shows total raised across ventures
+- Follow/unfollow functionality
+- Follower count display
+
+### Business Search
+- Full-text search across name, category, location, story
+- Debounced search (300ms)
+- Filter by category and location
+- Results sorted by trust score
+- Reusable search component
+
+### Platform Announcements
+- Admin-created announcements with variants (info, warning, success, critical)
+- Global banner display on all pages
+- Dismissible per-user (if dismissible=true)
+- Date range support (starts_at, ends_at)
+- Admin management interface
+
+### Admin Moderation Tools
+- /admin/reports: Content reports queue with review actions
+- /admin/comments: Comment moderation (hide/unhide/delete)
+- /admin/announcements: Create, toggle, delete announcements
+
+### Database Enhancements
+- comment_likes, update_likes tables
+- founder_follows table
+- comment_bans table
+- content_reports table
+- notification_prefs table
+- announcements, announcement_dismissals tables
+- Full-text search index on businesses (search_vector)
+- Triggers for counter updates (likes_count, comments_count)
+
+### Manual E2E Test Script (Phase 6)
+1. User A (KYC verified) comments on a business update → appears publicly
+2. User B replies to A's comment → one level of threading shown
+3. User A likes B's reply → likes_count updates
+4. Founder replies to A's comment → displayed as "Founder #XYZ"
+5. Admin hides B's reply with reason → disappears from public but author still sees "Hidden by moderator"
+6. User A reports the founder's comment → appears in /admin/reports
+7. Admin reviews → dismisses → report marked dismissed
+8. User A toggles off comment_replies in notification prefs → stops receiving reply notifications
+9. User A follows a founder → founder gets notified
+10. User A searches "tea" → only tea-related active businesses show
+11. Admin publishes announcement → visible to all users; user dismisses → hidden for that user
 
 ---
 
