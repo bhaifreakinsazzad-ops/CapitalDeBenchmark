@@ -1,5 +1,5 @@
 import { NavLink, useNavigate } from 'react-router-dom';
-import { LayoutDashboard, Shield, Users, CreditCard, ArrowDownCircle, ArrowUpCircle, FileText, ClipboardList, LogOut, DollarSign, TrendingUp, Target, BarChart3, Flag, MessageSquare, Megaphone } from 'lucide-react';
+import { LayoutDashboard, Shield, Users, CreditCard, ArrowDownCircle, ArrowUpCircle, FileText, ClipboardList, LogOut, DollarSign, TrendingUp, Target, BarChart3, Flag, MessageSquare, Megaphone, Eye, Settings } from 'lucide-react';
 import { BrandMark } from './brand-mark';
 import { useAuthStore } from '../../store';
 import bnMessages from '../../messages/bn.json';
@@ -29,6 +29,9 @@ export function AdminSidebar() {
     { to: '/admin/announcements', icon: Megaphone, label: lang === 'bn' ? 'ঘোষণা' : 'Announcements' },
     { to: '/admin/updates', icon: FileText, label: t.admin.updates },
     { to: '/admin/audit', icon: ClipboardList, label: t.admin.audit },
+    { to: '/admin/ads', icon: Eye, label: lang === 'bn' ? 'বিজ্ঞাপন' : 'Ads' },
+    { to: '/admin/settings', icon: Settings, label: lang === 'bn' ? 'সেটিংস' : 'Settings' },
+    { to: '/admin/trust', icon: Shield, label: lang === 'bn' ? 'ট্রাস্ট' : 'Trust' },
   ];
 
   const handleLogout = () => {

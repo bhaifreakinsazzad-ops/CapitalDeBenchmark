@@ -98,8 +98,8 @@ supabase/
 | 4 | Primary Investment, Share Receipts, Escrow, Portfolio ✅ |
 | 5 | Secondary Market, Order Book, Buyback, Market Maker ✅ |
 | 6 | Comments, Moderation, Search, Announcements ✅ |
-| 7 | Advanced KYC — Enhanced verification, compliance |
-| 8 | Admin Operations — Ads, reports, advanced analytics |
+| 7 | Localization, Learn Pages, Onboarding, Polish ✅ |
+| 8 | Ads Manager, Trust Automation, Audit, Settings, Reports ✅ |
 | 9 | Launch Polish — PWA, performance, legal pages |
 
 ## Phase 3 Features
@@ -406,6 +406,74 @@ supabase/
 9. User A follows a founder → founder gets notified
 10. User A searches "tea" → only tea-related active businesses show
 11. Admin publishes announcement → visible to all users; user dismisses → hidden for that user
+
+## Phase 8 Features
+
+### Ads Manager
+- Upload and manage ad banners with 5 placement types
+- Track impressions and clicks with CTR calculation
+- Priority-based ad selection with budget enforcement
+- 30-day stats visualization
+- Payment tracking and audit logging
+- AdSlot component for platform integration
+
+### Trust Score Automation
+- 10 automated rules for trust score updates:
+  - Follower milestones (10, 100, 500)
+  - Funding milestones (50%, 100%)
+  - Update activity (7d, 30d, 60d)
+  - Freshness (180d, 365d)
+- Idempotent execution with ±5 cap per run
+- Manual trigger and job logging
+- Notifications on significant changes
+
+### Audit Log Viewer
+- Comprehensive admin action logging
+- Advanced filtering (admin, action, target, date, search)
+- CSV export with UTF-8 BOM for Bangla text
+- Color-coded action types
+- Pagination for large datasets
+
+### Platform Settings UI
+- Edit all platform settings from UI
+- 6 categories: Money, Features, Payouts, Milestones, Branding, Trust
+- Feature flags for platform control
+- Type-safe settings access
+- Audit logging on changes
+
+### CSV Export Utility
+- UTF-8 CSV generation with BOM
+- Proper escaping for commas, quotes, newlines
+- Bangla text support
+- Predefined column sets for all entities
+- Download helper function
+
+### Reporting Dashboard
+- 6 KPI cards (Total Raised, Trade Volume, Trades, New Users, Active Users, Ad Revenue)
+- 30-day trend chart (SVG visualization)
+- Top 5 businesses by raised and trade volume
+- Pending queue summaries
+- Daily snapshot generation
+
+### Admin Pages
+- `/admin` - Reporting dashboard with KPIs and trends
+- `/admin/ads` - Ads management list
+- `/admin/ads/new` - Create new ad
+- `/admin/ads/:id/edit` - Edit existing ad
+- `/admin/settings` - Platform settings editor
+- `/admin/trust` - Trust automation dashboard
+- `/admin/audit` - Full audit log viewer
+
+### Manual E2E Test Script (Phase 8)
+1. Admin uploads a market_top ad → market page shows it
+2. Clicking ad increments click count → refresh increments impression count
+3. Admin runs trust job → businesses with no recent updates drop by -3
+4. Running trust job again produces no new event (idempotent)
+5. Admin opens /admin/audit → filters to "suspend" → sees only those
+6. Admin exports users CSV → opens in Excel → Bangla names render correctly
+7. Admin edits min_payout_bdt from 100 to 50 → founder can now request ৳50
+8. Admin toggles ads_enabled=false → all ad slots render nothing
+9. Admin runs stats snapshot → dashboard shows today's numbers
 
 ---
 

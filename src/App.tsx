@@ -45,13 +45,18 @@ import {
   AdminRechargePage,
   AdminWithdrawPage,
   AdminUpdatesPage,
-  AdminAuditPage,
 } from './pages/AdminPages';
 import { AdminReleasePage } from './pages/AdminReleasePage';
 import { AdminInvestmentsPage } from './pages/AdminInvestmentsPage';
 import { AdminMilestonePage } from './pages/AdminMilestonePage';
 import { AdminOrdersPage, AdminTradesPage, AdminMarketMakerPage } from './pages/AdminTradingPages';
 import { AdminReportsPage, AdminCommentsPage, AdminAnnouncementsPage } from './pages/AdminSocialPages';
+import { AdminAdsPage } from './pages/admin/AdsPage';
+import { AdminAdFormPage } from './pages/admin/AdFormPage';
+import { AdminAuditPage } from './pages/admin/AuditPage';
+import { AdminSettingsPage } from './pages/admin/SettingsPage';
+import { AdminTrustPage } from './pages/admin/TrustPage';
+import { AdminDashboardPage } from './pages/admin/DashboardPage';
 
 // Protected route for authenticated users
 function AuthenticatedLayout() {
@@ -164,7 +169,7 @@ function App() {
 
         {/* Admin routes */}
         <Route element={<AdminLayout />}>
-          <Route path="/admin" element={<AdminOverviewPage />} />
+          <Route path="/admin" element={<AdminDashboardPage />} />
           <Route path="/admin/verify" element={<AdminVerifyPage />} />
           <Route path="/admin/kyc" element={<AdminKycPage />} />
           <Route path="/admin/users" element={<AdminUsersPage />} />
@@ -181,6 +186,11 @@ function App() {
           <Route path="/admin/announcements" element={<AdminAnnouncementsPage />} />
           <Route path="/admin/updates" element={<AdminUpdatesPage />} />
           <Route path="/admin/audit" element={<AdminAuditPage />} />
+          <Route path="/admin/ads" element={<AdminAdsPage />} />
+          <Route path="/admin/ads/new" element={<AdminAdFormPage />} />
+          <Route path="/admin/ads/:id/edit" element={<AdminAdFormPage />} />
+          <Route path="/admin/settings" element={<AdminSettingsPage />} />
+          <Route path="/admin/trust" element={<AdminTrustPage />} />
         </Route>
 
         <Route path="*" element={<Navigate to="/" replace />} />
