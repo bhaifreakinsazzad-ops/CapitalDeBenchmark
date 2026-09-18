@@ -95,7 +95,7 @@ supabase/
 | 1 | Foundation — Schema, auth, roles, design system, stub pages ✅ |
 | 2 | Wallet, KYC, Recharge, Withdrawals ✅ |
 | 3 | Business Listing, Market, Verification, Updates ✅ |
-| 4 | Investment Flow — Buy shares, create receipts, update holdings |
+| 4 | Primary Investment, Share Receipts, Escrow, Portfolio ✅ |
 | 5 | Trading Exchange — Order book, matching engine, tradable receipts |
 | 6 | Advanced KYC — Enhanced verification, compliance |
 | 7 | Comments & Social — Update comments, interactions |
@@ -211,6 +211,59 @@ supabase/
 6. User → Request withdrawal of 50
 7. Admin → Approve, then Mark Paid
 8. User → Verify balance is 50 and txn history is correct
+
+## Phase 4 Features
+
+### Primary Investment
+- Investors can buy shares from active businesses at listed share price
+- Dual funding modes: Instant (immediate) vs Milestone (escrow until target)
+- Investment creates receipt with unique code
+- Wallet balance debited atomically on investment
+- Business shares_sold, escrow_balance, total_raised updated correctly
+
+### Escrow System
+- Milestone funding: funds held in escrow until target reached
+- Instant funding: funds available to founder immediately
+- Automatic escrow release when milestone target reached
+- Automatic refunds when milestones fail
+
+### Founder Fund Release
+- Founders request release of raised funds
+- Admin approval workflow with MFS details
+- Payout tracking with TrxID
+- Rejection with automatic refund to founder_balance
+
+### Portfolio Management
+- Full portfolio view with all holdings
+- Average buy price calculation
+- Current value and P/L tracking
+- Ownership percentage display
+- Investment history with receipt codes
+
+### Admin Controls
+- Fund release approval/rejection workflow
+- Investment monitoring dashboard
+- Milestone monitoring with deadline tracking
+- Force-release escrow or refund all investors
+- Trust score adjustments for funding progress
+
+### Notifications
+- Investment confirmed (to investor)
+- Investment received (to founder)
+- Milestone reached (to all parties)
+- Investment refunded (to investor)
+- Fund release approved/paid/rejected (to founder)
+- Fund release pending (to admin)
+
+### Manual E2E Test Script (Phase 4)
+1. As founder: list a milestone-mode business with target ৳1000, share price ৳10, 500 shares
+2. Admin verifies → business is active
+3. As investor A (KYC verified): buy 30 shares (৳300)
+4. Verify: A's wallet debited ৳300; business.escrow_balance = ৳300; A has 30 shares
+5. As investor B: buy 70 shares (৳700)
+6. Verify: milestone reached (total ৳1000 = target); escrow_balance = 0; founder_balance = ৳1000
+7. As founder: request payout of ৳500 → admin approves → mark paid
+8. Verify: business.founder_balance = ৳500; founder receives notification
 
 ---
 

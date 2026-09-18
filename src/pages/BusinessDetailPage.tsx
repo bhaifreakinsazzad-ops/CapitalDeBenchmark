@@ -182,6 +182,55 @@ export function BusinessDetailPage() {
         )}
       </div>
 
+      {/* Invest Box */}
+      {business.status === 'active' && !isOwner && (
+        <div className="card mb-6 border-brand-accent/20 bg-gradient-to-br from-brand-panel to-brand-panel2">
+          <h2 className="text-lg font-semibold text-brand-text mb-4">
+            {isBn ? `${business.name}-এ বিনিয়োগ করুন` : `Invest in ${business.name}`}
+          </h2>
+          
+          <div className="space-y-3 mb-4">
+            <div className="flex justify-between text-sm">
+              <span className="text-brand-muted">{isBn ? 'প্রতি শেয়ার মূল্য' : 'Price per share'}</span>
+              <Money amount={business.share_price} lang={lang} className="font-semibold" />
+            </div>
+            <div className="flex justify-between text-sm">
+              <span className="text-brand-muted">{isBn ? 'উপলব্ধ শেয়ার' : 'Shares available'}</span>
+              <span className="text-brand-text font-semibold">
+                {business.total_shares - business.shares_sold} / {business.total_shares}
+              </span>
+            </div>
+            {user && (
+              <div className="flex justify-between text-sm">
+                <span className="text-brand-muted">{isBn ? 'আপনার ব্যালেন্স' : 'Your balance'}</span>
+                <Money amount={user.balance} lang={lang} className="font-semibold" />
+              </div>
+            )}
+          </div>
+
+          {!isAuthenticated ? (
+            <Link to="/login" className="btn-primary w-full text-center block">
+              {isBn ? 'বিনিয়োগ করতে লগ ইন করুন' : 'Login to Invest'}
+            </Link>
+          ) : user?.kyc_status !== 'verified' ? (
+            <div>
+              <p className="text-xs text-brand-warn mb-2">{isBn ? 'বিনিয়োগের জন্য KYC প্রয়োজন' : 'KYC required to invest'}</p>
+              <Link to="/wallet/kyc" className="btn-primary w-full text-center block">
+                {isBn ? 'KYC সম্পন্ন করুন' : 'Complete KYC'}
+              </Link>
+            </div>
+          ) : business.total_shares - business.shares_sold === 0 ? (
+            <div className="text-center py-4">
+              <p className="text-sm text-brand-muted">{isBn ? 'সব শেয়ার বিক্রি হয়ে গেছে' : 'All shares sold'}</p>
+            </div>
+          ) : (
+            <Link to={`/invest/${business.slug}`} className="btn-primary w-full text-center block">
+              {isBn ? 'এখনই বিনিয়োগ করুন' : 'Invest Now'}
+            </Link>
+          )}
+        </div>
+      )}
+
       {/* Verification summary */}
       <div className="card mb-6">
         <h2 className="text-sm font-semibold text-brand-text mb-3">{isBn ? 'যাচাইকরণ সারাংশ' : 'Verification Summary'}</h2>
