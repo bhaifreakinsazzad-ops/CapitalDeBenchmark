@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Capital De Benchmark - Platform Initialization</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #0a0e13 0%, #121a23 100%);
+            color: #e8eef6;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            width: 100%;
+        }
+        
+        .card {
+            background: #121a23;
+            border: 1px solid #233040;
+            border-radius: 16px;
+            padding: 40px;
+            margin-bottom: 20px;
+        }
+        
+        h1 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #00d09c;
+        }
+        
+        h2 {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #e8eef6;
+        }
+        
+        p {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #8ba0b6;
+            margin-bottom: 15px;
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .stat {
+            background: #18222e;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 32px;
+            font-weight: 700;
+            color: #00d09c;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            font-size: 14px;
+            color: #8ba0b6;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            background: #00d09c;
+            color: #0a0e13;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .btn:hover {
+            background: #00a87d;
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: #00d09c;
+            border: 2px solid #00d09c;
+        }
+        
+        .btn-secondary:hover {
+            background: #00d09c;
+            color: #0a0e13;
+        }
+        
+        .status {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        
+        .status-success {
+            background: rgba(0, 208, 156, 0.1);
+            color: #00d09c;
+            border: 1px solid #00d09c;
+        }
+        
+        .status-warning {
+            background: rgba(245, 185, 66, 0.1);
+            color: #f5b942;
+            border: 1px solid #f5b942;
+        }
+        
+        .checklist {
+            list-style: none;
+            margin: 20px 0;
+        }
+        
+        .checklist li {
+            padding: 10px 0;
+            border-bottom: 1px solid #233040;
+            display: flex;
+            align-items: center;
+        }
+        
+        .checklist li:before {
+            content: "✅";
+            margin-right: 10px;
+            font-size: 20px;
+        }
+        
+        .checklist li.pending:before {
+            content: "⏳";
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #8ba0b6;
+            font-size: 14px;
+        }
+        
+        .footer a {
+            color: #00d09c;
+            text-decoration: none;
+        }
+        
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <span class="status status-success">✅ READY FOR INITIALIZATION</span>
+            <h1>🚀 Capital De Benchmark</h1>
+            <h2>Platform Initialization Portal</h2>
+            <p>Welcome to the Capital De Benchmark platform initialization portal. This page will help you set up the complete Freakin Studio venture ecosystem with all 17 ventures.</p>
+            
+            <div class="stats">
+                <div class="stat">
+                    <div class="stat-value">17</div>
+                    <div class="stat-label">Ventures</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">8</div>
+                    <div class="stat-label">Industries</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">৳3.85M</div>
+                    <div class="stat-label">Capital</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">৳185K</div>
+                    <div class="stat-label">Monthly Revenue</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <h2>📋 Initialization Checklist</h2>
+            <ul class="checklist">
+                <li>Create founder account (BhaiSazzaD)</li>
+                <li>Initialize all 17 Freakin Studio ventures</li>
+                <li>Configure business details and financials</li>
+                <li>Set up document placeholders</li>
+                <li>Create photo placeholders</li>
+                <li>Generate initial updates for live ventures</li>
+                <li>Verify all ventures in admin panel</li>
+                <li>Test investment flow</li>
+                <li>Launch platform</li>
+            </ul>
+        </div>
+        
+        <div class="card">
+            <h2>🎯 Quick Start</h2>
+            <p>To initialize the platform with all Freakin Studio ventures, open your browser console and run:</p>
+            <pre style="background: #18222e; padding: 15px; border-radius: 8px; overflow-x: auto; margin: 15px 0;"><code style="color: #00d09c;">// Initialize all ventures
+import { initializeFreakinStudio } from './scripts/initializeFreakinStudio';
+initializeFreakinStudio();
+
+// Verify all ventures
+import { printVerificationReport } from './scripts/verifyVentures';
+printVerificationReport();</code></pre>
+            
+            <p>Or use the buttons below to access key pages:</p>
+            
+            <a href="/freakin-studio" class="btn">View Ecosystem</a>
+            <a href="/market" class="btn">Browse Market</a>
+            <a href="/admin" class="btn btn-secondary">Admin Panel</a>
+            <a href="/learn" class="btn btn-secondary">Learn Center</a>
+        </div>
+        
+        <div class="card">
+            <h2>📞 Support & Contact</h2>
+            <p><strong>Freakin Studio:</strong> hello@freakinstudio.space</p>
+            <p><strong>Platform Support:</strong> support@capitaldebenchmark.com</p>
+            <p><strong>Founder Portfolio:</strong> <a href="https://bhaisazzad.online" target="_blank" style="color: #00d09c;">bhaisazzad.online</a></p>
+        </div>
+        
+        <div class="footer">
+            <p>Made in Bangladesh 🇧🇩 | Built for the World 🌍</p>
+            <p>© 2025 Capital De Benchmark. All rights reserved.</p>
+            <p>
+                <a href="/legal/terms">Terms</a> | 
+                <a href="/legal/privacy">Privacy</a> | 
+                <a href="/legal/risk">Risk Disclosure</a>
+            </p>
+        </div>
+    </div>
+</body>
+</html>
