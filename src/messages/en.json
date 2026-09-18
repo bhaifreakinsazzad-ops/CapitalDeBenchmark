@@ -1,0 +1,79 @@
+{
+  "common": {
+    "appFullName": "Capital De Benchmark",
+    "appShortName": "CapitalDB",
+    "tagline": "Own a piece of real Bangladeshi businesses — from ৳5.",
+    "loading": "Loading...",
+    "save": "Save",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "back": "Back",
+    "next": "Next",
+    "submit": "Submit",
+    "logout": "Logout",
+    "login": "Login",
+    "register": "Register",
+    "comingSoon": "Coming Soon",
+    "phase": "Phase"
+  },
+  "nav": {
+    "market": "Market",
+    "portfolio": "Portfolio",
+    "wallet": "Wallet",
+    "updates": "Updates",
+    "profile": "Profile",
+    "myBiz": "My Ventures",
+    "admin": "Admin",
+    "dashboard": "Dashboard",
+    "notifications": "Notifications"
+  },
+  "auth": {
+    "loginTitle": "Sign in to your account",
+    "registerTitle": "Create a new account",
+    "name": "Full Name",
+    "phone": "Phone Number",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "iWantTo": "I want to",
+    "asInvestor": "Invest",
+    "asFounder": "Raise Funds",
+    "haveAccount": "Already have an account?",
+    "noAccount": "Don't have an account?",
+    "phonePlaceholder": "01XXXXXXXXX",
+    "namePlaceholder": "Enter your name"
+  },
+  "risk": {
+    "title": "Risk Warning",
+    "body": "Investing in real businesses carries risk. You may lose your money. Only invest what you can afford to lose.",
+    "checkbox": "I understand and accept the risks"
+  },
+  "money": {
+    "symbol": "৳"
+  },
+  "brand": {
+    "walletPrefix": "CDB"
+  },
+  "onboarding": {
+    "welcome": "Welcome to Capital De Benchmark!",
+    "welcomeDesc": "The easiest platform to invest in verified Bangladeshi businesses.",
+    "whatIs": "What is Capital De Benchmark?",
+    "whatIsDesc": "You can buy shares in verified Bangladeshi businesses starting from just ৳5. Your shares become tradable receipts.",
+    "riskWarning": "Risk Warning",
+    "riskWarningDesc": "Investments always carry risk. You may lose money.",
+    "completeKyc": "Complete KYC",
+    "completeKycDesc": "Verify your identity by completing KYC.",
+    "done": "All Set!",
+    "doneDesc": "You're ready to start investing."
+  },
+  "admin": {
+    "title": "Admin Console",
+    "overview": "Overview",
+    "verifyQueue": "Verification Queue",
+    "kycQueue": "KYC Queue",
+    "users": "Users",
+    "recharge": "Recharge",
+    "withdraw": "Withdrawals",
+    "updates": "Update Approval",
+    "audit": "Audit Log"
+  }
+}

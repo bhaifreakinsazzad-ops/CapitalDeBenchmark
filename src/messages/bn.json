@@ -1,0 +1,79 @@
+{
+  "common": {
+    "appFullName": "Capital De Benchmark",
+    "appShortName": "CapitalDB",
+    "tagline": "আসল বাংলাদেশী ব্যবসার একটি অংশের মালিক হন — মাত্র ৳৫ থেকে।",
+    "loading": "লোড হচ্ছে...",
+    "save": "সংরক্ষণ",
+    "cancel": "বাতিল",
+    "confirm": "নিশ্চিত করুন",
+    "back": "পেছনে",
+    "next": "পরবর্তী",
+    "submit": "জমা দিন",
+    "logout": "লগ আউট",
+    "login": "লগ ইন",
+    "register": "রেজিস্টার",
+    "comingSoon": "শীঘ্রই আসছে",
+    "phase": "পর্যায়"
+  },
+  "nav": {
+    "market": "বাজার",
+    "portfolio": "পোর্টফোলিও",
+    "wallet": "ওয়ালেট",
+    "updates": "আপডেট",
+    "profile": "প্রোফাইল",
+    "myBiz": "আমার ব্যবসা",
+    "admin": "অ্যাডমিন",
+    "dashboard": "ড্যাশবোর্ড",
+    "notifications": "নোটিফিকেশন"
+  },
+  "auth": {
+    "loginTitle": "আপনার অ্যাকাউন্টে লগ ইন করুন",
+    "registerTitle": "নতুন অ্যাকাউন্ট তৈরি করুন",
+    "name": "পূর্ণ নাম",
+    "phone": "মোবাইল নম্বর",
+    "password": "পাসওয়ার্ড",
+    "confirmPassword": "পাসওয়ার্ড নিশ্চিত করুন",
+    "iWantTo": "আমি চাই",
+    "asInvestor": "বিনিয়োগকারী হিসেবে",
+    "asFounder": "প্রতিষ্ঠাতা হিসেবে",
+    "haveAccount": "ইতিমধ্যে অ্যাকাউন্ট আছে?",
+    "noAccount": "অ্যাকাউন্ট নেই?",
+    "phonePlaceholder": "01XXXXXXXXX",
+    "namePlaceholder": "আপনার নাম লিখুন"
+  },
+  "risk": {
+    "title": "ঝুঁকি সতর্কতা",
+    "body": "আসল ব্যবসায় বিনিয়োগে ঝুঁকি আছে। আপনি আপনার টাকা হারাতে পারেন। শুধু সেই টাকা বিনিয়োগ করুন যা হারালেও আপনার ক্ষতি হবে না।",
+    "checkbox": "আমি ঝুঁকি বুঝি এবং গ্রহণ করি"
+  },
+  "money": {
+    "symbol": "৳"
+  },
+  "brand": {
+    "walletPrefix": "CDB"
+  },
+  "onboarding": {
+    "welcome": "Capital De Benchmark-এ স্বাগতম!",
+    "welcomeDesc": "বাংলাদেশের যাচাইকৃত ব্যবসায় বিনিয়োগ করার সহজতম প্ল্যাটফর্ম।",
+    "whatIs": "Capital De Benchmark কী?",
+    "whatIsDesc": "আপনি মাত্র ৳৫ থেকে যাচাইকৃত বাংলাদেশী ব্যবসায় শেয়ার কিনতে পারবেন। আপনার শেয়ার ট্রেডযোগ্য রসিদ হিসেবে থাকবে।",
+    "riskWarning": "ঝুঁকি সতর্কতা",
+    "riskWarningDesc": "বিনিয়োগে সবসময় ঝুঁকি থাকে। আপনার ক্ষতি হতে পারে।",
+    "completeKyc": "KYC সম্পন্ন করুন",
+    "completeKycDesc": "আপনার পরিচয় যাচাই করতে KYC সম্পন্ন করুন।",
+    "done": "সব প্রস্তুত!",
+    "doneDesc": "আপনি বিনিয়োগ শুরু করতে প্রস্তুত।"
+  },
+  "admin": {
+    "title": "অ্যাডমিন কনসোল",
+    "overview": "ওভারভিউ",
+    "verifyQueue": "যাচাইকরণ সারি",
+    "kycQueue": "KYC সারি",
+    "users": "ব্যবহারকারী",
+    "recharge": "রিচার্জ",
+    "withdraw": "উত্তোলন",
+    "updates": "আপডেট অনুমোদন",
+    "audit": "অডিট লগ"
+  }
+}

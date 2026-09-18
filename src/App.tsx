@@ -1,5 +1,141 @@
-export default function App() {
+import { BrowserRouter, Routes, Route, Navigate, Outlet, useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useAuthStore } from './store';
+
+// Layouts
+import { TopBar } from './components/layout/top-bar';
+import { BottomNav } from './components/layout/bottom-nav';
+import { AdminSidebar } from './components/layout/admin-sidebar';
+
+// Pages
+import { LandingPage } from './pages/LandingPage';
+import { LoginPage } from './pages/LoginPage';
+import { RegisterPage } from './pages/RegisterPage';
+import { OnboardingPage } from './pages/OnboardingPage';
+import { DashboardPage } from './pages/DashboardPage';
+import { PortfolioPage } from './pages/PortfolioPage';
+import { WalletPage } from './pages/WalletPage';
+import { MarketPage, BusinessDetailPage } from './pages/MarketPage';
+import { MyBizPage } from './pages/MyBizPage';
+import { NotificationsPage } from './pages/NotificationsPage';
+import { LearnPage } from './pages/LearnPage';
+import {
+  AdminOverviewPage,
+  AdminVerifyPage,
+  AdminKycPage,
+  AdminUsersPage,
+  AdminRechargePage,
+  AdminWithdrawPage,
+  AdminUpdatesPage,
+  AdminAuditPage,
+} from './pages/AdminPages';
+
+// Protected route for authenticated users
+function AuthenticatedLayout() {
+  const { isAuthenticated, user } = useAuthStore();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!isAuthenticated) {
+      navigate('/login');
+    }
+  }, [isAuthenticated, navigate]);
+
+  if (!isAuthenticated) return null;
+
   return (
-    <div/>
+    <div className="min-h-screen flex flex-col">
+      <TopBar />
+      <main className="flex-1">
+        <Outlet />
+      </main>
+      <BottomNav />
+    </div>
   );
 }
+
+// Protected route for admin users
+function AdminLayout() {
+  const { isAuthenticated, user } = useAuthStore();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!isAuthenticated) {
+      navigate('/login');
+    } else if (user && user.role !== 'admin' && user.role !== 'super_admin') {
+      navigate('/dashboard');
+    }
+  }, [isAuthenticated, user, navigate]);
+
+  if (!isAuthenticated || !user || (user.role !== 'admin' && user.role !== 'super_admin')) {
+    return null;
+  }
+
+  return (
+    <div className="min-h-screen flex">
+      <AdminSidebar />
+      <div className="flex-1 flex flex-col">
+        {/* Mobile admin header */}
+        <header className="md:hidden sticky top-0 z-50 bg-brand-bg/90 backdrop-blur-md border-b border-brand-line px-4 h-14 flex items-center">
+          <div>
+            <p className="text-sm font-bold text-brand-text">Capital De Benchmark</p>
+            <p className="text-[10px] text-brand-muted">Admin Console</p>
+          </div>
+        </header>
+        <main className="flex-1 overflow-auto">
+          <Outlet />
+        </main>
+      </div>
+    </div>
+  );
+}
+
+// Public layout (no auth required)
+function PublicLayout() {
+  return <Outlet />;
+}
+
+function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        {/* Public routes */}
+        <Route element={<PublicLayout />}>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/market" element={<MarketPage />} />
+          <Route path="/biz/:id" element={<BusinessDetailPage />} />
+          <Route path="/learn" element={<LearnPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/onboarding" element={<OnboardingPage />} />
+        </Route>
+
+        {/* Authenticated user routes */}
+        <Route element={<AuthenticatedLayout />}>
+          <Route path="/dashboard" element={<DashboardPage />} />
+          <Route path="/portfolio" element={<PortfolioPage />} />
+          <Route path="/wallet" element={<WalletPage />} />
+          <Route path="/mybiz" element={<MyBizPage />} />
+          <Route path="/notifications" element={<NotificationsPage />} />
+        </Route>
+
+        {/* Admin routes */}
+        <Route element={<AdminLayout />}>
+          <Route path="/admin" element={<AdminOverviewPage />} />
+          <Route path="/admin/verify" element={<AdminVerifyPage />} />
+          <Route path="/admin/kyc" element={<AdminKycPage />} />
+          <Route path="/admin/users" element={<AdminUsersPage />} />
+          <Route path="/admin/recharge" element={<AdminRechargePage />} />
+          <Route path="/admin/withdraw" element={<AdminWithdrawPage />} />
+          <Route path="/admin/updates" element={<AdminUpdatesPage />} />
+          <Route path="/admin/audit" element={<AdminAuditPage />} />
+        </Route>
+
+        {/* Catch all */}
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </BrowserRouter>
+  );
+}
+
+export default App;
