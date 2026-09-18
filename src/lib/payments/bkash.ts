@@ -1,13 +1,16 @@
 import { PaymentProvider } from './provider';
 
-// bKash Merchant API Configuration
-const BKASH_CONFIG = {
-  baseUrl: (window as any).__BKASH_BASE_URL__ || 'https://tokenized.sandbox.bka.sh/v1.2.0-beta',
-  appKey: (window as any).__BKASH_APP_KEY__ || '',
-  appSecret: (window as any).__BKASH_APP_SECRET__ || '',
-  username: (window as any).__BKASH_USERNAME__ || '',
-  password: (window as any).__BKASH_PASSWORD__ || '',
-};
+// bKash Merchant API Configuration - lazy loaded to avoid SSR issues
+function getBkashConfig() {
+  const w = typeof window !== 'undefined' ? window as any : {};
+  return {
+    baseUrl: w.__BKASH_BASE_URL__ || 'https://tokenized.sandbox.bka.sh/v1.2.0-beta',
+    appKey: w.__BKASH_APP_KEY__ || '',
+    appSecret: w.__BKASH_APP_SECRET__ || '',
+    username: w.__BKASH_USERNAME__ || '',
+    password: w.__BKASH_PASSWORD__ || '',
+  };
+}
 
 let authToken: string | null = null;
 let tokenExpiry: number = 0;
@@ -18,17 +21,18 @@ async function grantToken(): Promise<string> {
     return authToken;
   }
 
-  const response = await fetch(`${BKASH_CONFIG.baseUrl}/tokenized/checkout/token/grant`, {
+  const config = getBkashConfig();
+  const response = await fetch(`${config.baseUrl}/tokenized/checkout/token/grant`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
       'accept': 'application/json',
-      'username': BKASH_CONFIG.username,
-      'password': BKASH_CONFIG.password,
+      'username': config.username,
+      'password': config.password,
     },
     body: JSON.stringify({
-      app_key: BKASH_CONFIG.appKey,
-      app_secret: BKASH_CONFIG.appSecret,
+      app_key: config.appKey,
+      app_secret: config.appSecret,
     }),
   });
 
@@ -49,14 +53,15 @@ const bkashProvider: PaymentProvider = {
 
   async createIntent({ amount, userPhone, reference, callbackUrl }) {
     const token = await grantToken();
+    const config = getBkashConfig();
 
-    const response = await fetch(`${BKASH_CONFIG.baseUrl}/tokenized/checkout/create`, {
+    const response = await fetch(`${config.baseUrl}/tokenized/checkout/create`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'accept': 'application/json',
         'authorization': token,
-        'x-app-key': BKASH_CONFIG.appKey,
+        'x-app-key': config.appKey,
       },
       body: JSON.stringify({
         mode: '0011', // Single payment
@@ -107,14 +112,15 @@ const bkashProvider: PaymentProvider = {
 
   async queryStatus(providerRef: string) {
     const token = await grantToken();
+    const config = getBkashConfig();
 
-    const response = await fetch(`${BKASH_CONFIG.baseUrl}/tokenized/checkout/payment/status`, {
+    const response = await fetch(`${config.baseUrl}/tokenized/checkout/payment/status`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'accept': 'application/json',
         'authorization': token,
-        'x-app-key': BKASH_CONFIG.appKey,
+        'x-app-key': config.appKey,
       },
       body: JSON.stringify({
         paymentID: providerRef,
@@ -157,14 +163,15 @@ const bkashProvider: PaymentProvider = {
 
   async refund(providerRef: string, amount: number) {
     const token = await grantToken();
+    const config = getBkashConfig();
 
-    const response = await fetch(`${BKASH_CONFIG.baseUrl}/tokenized/checkout/refund`, {
+    const response = await fetch(`${config.baseUrl}/tokenized/checkout/refund`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'accept': 'application/json',
         'authorization': token,
-        'x-app-key': BKASH_CONFIG.appKey,
+        'x-app-key': config.appKey,
       },
       body: JSON.stringify({
         paymentID: providerRef,

@@ -1,8 +1,11 @@
-// Email Service Configuration (using Resend)
-const EMAIL_CONFIG = {
-  apiKey: (window as any).__RESEND_API_KEY__ || '',
-  fromEmail: (window as any).__EMAIL_FROM__ || 'Capital De Benchmark <no-reply@capitaldebenchmark.com>',
-};
+// Email Service Configuration (using Resend) - lazy loaded to avoid SSR issues
+function getEmailConfig() {
+  const w = typeof window !== 'undefined' ? window as any : {};
+  return {
+    apiKey: w.__RESEND_API_KEY__ || '',
+    fromEmail: w.__EMAIL_FROM__ || 'Capital De Benchmark <no-reply@capitaldebenchmark.com>',
+  };
+}
 
 export interface EmailResult {
   success: boolean;
@@ -17,7 +20,8 @@ export async function sendEmail(params: {
   html: string;
   text?: string;
 }): Promise<EmailResult> {
-  if (!EMAIL_CONFIG.apiKey) {
+  const config = getEmailConfig();
+  if (!config.apiKey) {
     console.warn('Email API key not configured, skipping email send');
     return { success: false, error: 'Email not configured' };
   }
@@ -27,10 +31,10 @@ export async function sendEmail(params: {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${EMAIL_CONFIG.apiKey}`,
+        'Authorization': `Bearer ${config.apiKey}`,
       },
       body: JSON.stringify({
-        from: EMAIL_CONFIG.fromEmail,
+        from: config.fromEmail,
         to: params.to,
         subject: params.subject,
         html: params.html,

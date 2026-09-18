@@ -27,6 +27,7 @@ import { FAQPage } from './pages/learn/FAQPage';
 import { FeedPage } from './pages/FeedPage';
 import { SearchPage } from './pages/SearchPage';
 import { FounderProfilePage } from './pages/FounderProfilePage';
+import { FreakinStudioPage } from './pages/FreakinStudioPage';
 
 // Legal Pages
 import { TermsPage } from './pages/legal/TermsPage';
@@ -169,6 +170,7 @@ function App() {
           <Route path="/feed" element={<FeedPage />} />
           <Route path="/search" element={<SearchPage />} />
           <Route path="/founder/:id" element={<FounderProfilePage />} />
+          <Route path="/freakin-studio" element={<FreakinStudioPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/onboarding" element={<OnboardingPage />} />

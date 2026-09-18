@@ -1,10 +1,13 @@
-// SMS Service Configuration
-const SMS_CONFIG = {
-  provider: (window as any).__SMS_PROVIDER__ || 'bulksmsbd',
-  apiKey: (window as any).__SMS_API_KEY__ || '',
-  senderId: (window as any).__SMS_SENDER_ID__ || 'CapitalDB',
-  baseUrl: (window as any).__SMS_BASE_URL__ || 'https://bulksmsbd.com/api/smsapi',
-};
+// SMS Service Configuration - lazy loaded to avoid SSR issues
+function getSmsConfig() {
+  const w = typeof window !== 'undefined' ? window as any : {};
+  return {
+    provider: w.__SMS_PROVIDER__ || 'bulksmsbd',
+    apiKey: w.__SMS_API_KEY__ || '',
+    senderId: w.__SMS_SENDER_ID__ || 'CapitalDB',
+    baseUrl: w.__SMS_BASE_URL__ || 'https://bulksmsbd.com/api/smsapi',
+  };
+}
 
 export interface SmsResult {
   success: boolean;
@@ -14,22 +17,23 @@ export interface SmsResult {
 
 // Send SMS via BulkSMSBD (primary BD provider)
 export async function sendSms(phone: string, message: string): Promise<SmsResult> {
-  if (!SMS_CONFIG.apiKey) {
+  const config = getSmsConfig();
+  if (!config.apiKey) {
     console.warn('SMS API key not configured, skipping SMS send');
     return { success: false, error: 'SMS not configured' };
   }
 
   try {
-    const response = await fetch(SMS_CONFIG.baseUrl, {
+    const response = await fetch(config.baseUrl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        api_key: SMS_CONFIG.apiKey,
+        api_key: config.apiKey,
         type: 'text',
         number: phone,
-        senderid: SMS_CONFIG.senderId,
+        senderid: config.senderId,
         message: message,
       }),
     });
