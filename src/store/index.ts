@@ -45,6 +45,11 @@ interface UserRecord {
   wallet_id: string;
   balance: number;
   preferred_lang: 'bn' | 'en';
+  nid_number?: string;
+  whatsapp_number?: string;
+  present_address?: string;
+  payout_mfs_method?: 'bkash' | 'nagad' | 'rocket' | 'upay';
+  payout_mfs_number?: string;
 }
 
 interface DemoStore {

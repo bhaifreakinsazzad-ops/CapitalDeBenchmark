@@ -7,18 +7,25 @@ import { TopBar } from './components/layout/top-bar';
 import { BottomNav } from './components/layout/bottom-nav';
 import { AdminSidebar } from './components/layout/admin-sidebar';
 
-// Pages
+// Public Pages
 import { LandingPage } from './pages/LandingPage';
 import { LoginPage } from './pages/LoginPage';
 import { RegisterPage } from './pages/RegisterPage';
 import { OnboardingPage } from './pages/OnboardingPage';
+import { MarketPage, BusinessDetailPage } from './pages/MarketPage';
+import { LearnPage } from './pages/LearnPage';
+
+// App Pages
 import { DashboardPage } from './pages/DashboardPage';
 import { PortfolioPage } from './pages/PortfolioPage';
-import { WalletPage } from './pages/WalletPage';
-import { MarketPage, BusinessDetailPage } from './pages/MarketPage';
+import { WalletPage } from './pages/wallet/WalletPage';
+import { RechargePage } from './pages/wallet/RechargePage';
+import { WithdrawPage } from './pages/wallet/WithdrawPage';
+import { KycPage } from './pages/wallet/KycPage';
 import { MyBizPage } from './pages/MyBizPage';
 import { NotificationsPage } from './pages/NotificationsPage';
-import { LearnPage } from './pages/LearnPage';
+
+// Admin Pages
 import {
   AdminOverviewPage,
   AdminVerifyPage,
@@ -32,7 +39,7 @@ import {
 
 // Protected route for authenticated users
 function AuthenticatedLayout() {
-  const { isAuthenticated, user } = useAuthStore();
+  const { isAuthenticated } = useAuthStore();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -115,6 +122,9 @@ function App() {
           <Route path="/dashboard" element={<DashboardPage />} />
           <Route path="/portfolio" element={<PortfolioPage />} />
           <Route path="/wallet" element={<WalletPage />} />
+          <Route path="/wallet/recharge" element={<RechargePage />} />
+          <Route path="/wallet/withdraw" element={<WithdrawPage />} />
+          <Route path="/wallet/kyc" element={<KycPage />} />
           <Route path="/mybiz" element={<MyBizPage />} />
           <Route path="/notifications" element={<NotificationsPage />} />
         </Route>

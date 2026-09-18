@@ -12,6 +12,15 @@ export interface User {
   balance: number;
   preferred_lang: 'bn' | 'en';
   trust_flags: Record<string, unknown>;
+  kyc_submitted_at?: string;
+  kyc_reviewed_by?: string;
+  kyc_reviewed_at?: string;
+  kyc_rejection_reason?: string;
+  whatsapp_number?: string;
+  present_address?: string;
+  nid_number?: string;
+  payout_mfs_method?: 'bkash' | 'nagad' | 'rocket' | 'upay';
+  payout_mfs_number?: string;
   created_at: string;
   updated_at: string;
 }

@@ -93,14 +93,60 @@ supabase/
 | Phase | Description |
 |-------|-------------|
 | 1 | Foundation — Schema, auth, roles, design system, stub pages ✅ |
-| 2 | Business Listing — Founders create businesses, admin verifies |
-| 3 | Wallet & Recharge — MFS integration, balance management |
+| 2 | Wallet, KYC, Recharge, Withdrawals ✅ |
+| 3 | Business Listing — Founders create businesses, admin verifies |
 | 4 | Investment Flow — Buy shares, create receipts, update holdings |
 | 5 | Trading Exchange — Order book, matching engine, tradable receipts |
-| 6 | KYC & Compliance — Document upload, verification flow |
+| 6 | Advanced KYC — Enhanced verification, compliance |
 | 7 | Updates & Social — Founder posts, comments, notifications |
-| 8 | Admin Operations — Full admin dashboard with actions |
+| 8 | Admin Operations — Full admin dashboard enhancements |
 | 9 | Launch Polish — PWA, performance, analytics, legal pages |
+
+## Phase 2 Features
+
+### Wallet System
+- Internal ledger wallet with CDB-XXXX-XXXX wallet IDs
+- Crypto-style transaction hashes (0x + 32 hex chars)
+- Atomic credit/debit operations via Postgres functions
+- Full transaction history with expandable details
+
+### MFS Recharge
+- Submit recharge via bKash, Nagad, Rocket, or Upay
+- TrxID uniqueness enforced at database level
+- Admin approval queue with one-click approve/reject
+- Rate limited: max 10 recharges per user per hour
+
+### KYC Verification
+- Upload NID front/back, utility bill, optional selfie
+- Admin review queue with document viewer
+- Approve/reject with reason notifications
+- Rate limited: max 3 submissions per user per day
+
+### Withdrawals
+- Request withdrawal to verified MFS number
+- Balance debited immediately on submission
+- Admin approval with payout TrxID tracking
+- Automatic refund on rejection
+- Rate limited: max 5 withdrawals per user per hour
+
+### Notifications
+- In-app notifications for all wallet/KYC events
+- Unread count badge in top bar
+- Mark individual or all as read
+
+### Storage Buckets (Supabase)
+- `kyc-documents` — Private bucket for KYC uploads
+- `business-media` — Public bucket (for Phase 3)
+
+### Manual E2E Test Script
+1. Register a new user (phone: 01XXXXXXXXX)
+2. Submit KYC with sample images
+3. Login as admin (01700000000 / admin123) → Approve KYC
+4. Login as user → Recharge 100 via bKash flow (use any TrxID)
+5. Login as admin → Approve recharge → user balance becomes 100
+6. User → Request withdrawal of 50
+7. Admin → Approve, then Mark Paid
+8. User → Verify balance is 50 and txn history is correct
 
 ---
 

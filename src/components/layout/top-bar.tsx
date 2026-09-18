@@ -4,15 +4,19 @@ import { Bell, User, LogOut, LayoutDashboard, Briefcase, Wallet, ChevronDown } f
 import { BrandMark } from './brand-mark';
 import { LangToggle } from './lang-toggle';
 import { useAuthStore } from '../../store';
+import { useNotificationStore } from '../../lib/services/notify';
 import bnMessages from '../../messages/bn.json';
 import enMessages from '../../messages/en.json';
 
 export function TopBar() {
   const { user, lang, logout } = useAuthStore();
+  const { getUnreadCount } = useNotificationStore();
   const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const t = lang === 'bn' ? bnMessages : enMessages;
+
+  const unreadCount = user ? getUnreadCount(user.id) : 0;
 
   useEffect(() => {
     function handleClick(e: MouseEvent) {
@@ -41,10 +45,17 @@ export function TopBar() {
           
           {user && (
             <>
-              <button className="relative p-2 rounded-lg text-brand-muted hover:text-brand-text hover:bg-brand-panel transition-colors">
+              <Link 
+                to="/notifications" 
+                className="relative p-2 rounded-lg text-brand-muted hover:text-brand-text hover:bg-brand-panel transition-colors"
+              >
                 <Bell className="w-5 h-5" />
-                <span className="absolute top-1 right-1 w-2 h-2 bg-brand-bad rounded-full" />
-              </button>
+                {unreadCount > 0 && (
+                  <span className="absolute top-1 right-1 min-w-[16px] h-4 bg-brand-bad rounded-full flex items-center justify-center">
+                    <span className="text-[9px] font-bold text-white px-1">{unreadCount > 9 ? '9+' : unreadCount}</span>
+                  </span>
+                )}
+              </Link>
 
               <div className="relative" ref={menuRef}>
                 <button
