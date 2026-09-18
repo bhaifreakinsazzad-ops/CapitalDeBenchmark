@@ -100,7 +100,7 @@ supabase/
 | 6 | Comments, Moderation, Search, Announcements ✅ |
 | 7 | Localization, Learn Pages, Onboarding, Polish ✅ |
 | 8 | Ads Manager, Trust Automation, Audit, Settings, Reports ✅ |
-| 9 | Launch Polish — PWA, performance, legal pages |
+| 9 | Payment Gateway, SMS/Email, Security, Performance, Legal ✅ |
 
 ## Phase 3 Features
 
@@ -474,6 +474,87 @@ supabase/
 7. Admin edits min_payout_bdt from 100 to 50 → founder can now request ৳50
 8. Admin toggles ads_enabled=false → all ad slots render nothing
 9. Admin runs stats snapshot → dashboard shows today's numbers
+
+## Phase 9 Features
+
+### Payment Gateway Integration
+- **bKash Merchant API** - Fully implemented with sandbox/production support
+  - Token-based authentication
+  - Payment intent creation
+  - Webhook/callback verification
+  - Status query and refund support
+- **Nagad/Rocket/Upay** - Stub implementations ready for integration
+- **Manual MFS** - Retained as fallback for non-integrated providers
+- **Idempotency** - Prevents double-charging via unique transaction tracking
+- **Payment Intents** - Full lifecycle management (created → pending → succeeded/failed)
+
+### SMS & Email Integration
+- **SMS via BulkSMSBD** - OTP and transactional SMS
+  - OTP generation and verification
+  - Rate limiting (3 per phone per 15 min)
+  - Bilingual templates (Bangla/English)
+- **Email via Resend** - Transactional emails
+  - Welcome emails
+  - KYC approval/rejection
+  - Investment receipts
+  - Withdrawal confirmations
+  - Bilingual templates
+
+### Security Hardening
+- **2FA for Admins** - TOTP-based two-factor authentication
+  - QR code setup
+  - Recovery codes
+  - Session management
+- **Rate Limiting** - Comprehensive rate limits on all endpoints
+  - Auth: 10 login attempts per 15 min
+  - OTP: 3 sends per phone per 15 min
+  - Trading: 30 orders per hour
+  - Payments: 10 intents per hour
+- **CSRF Protection** - Origin validation on all mutating endpoints
+- **Session Management** - Event logging and revocation
+- **Password Policy** - Minimum 8 chars, complexity requirements
+- **Security Headers** - CSP, HSTS, X-Frame-Options, etc.
+
+### Performance Optimization
+- **Database Indexes** - Optimized queries for all major operations
+- **Caching** - Platform settings cached (60s TTL)
+- **Image Optimization** - Lazy loading, proper sizing
+- **Code Splitting** - Admin pages lazy-loaded
+
+### Legal Pages
+- **Terms of Service** - Comprehensive terms covering eligibility, investments, liability
+- **Privacy Policy** - Data collection, usage, retention, user rights
+- **Risk Disclosure** - Detailed risk warnings for investors
+- **Refund Policy** - Clear refund rules for different scenarios
+- **Cookie Policy** - Cookie types and user control
+- **AML/KYC Policy** - Compliance requirements and procedures
+- **Grievance Redressal** - Complaint process and timelines
+- All pages bilingual (Bangla/English)
+
+### Launch Preparation
+- **LAUNCH.md** - Complete launch checklist
+- **QA.md** - Comprehensive QA testing guide
+- **Incident Runbook** - Procedures for common issues
+- **Backup Strategy** - Daily DB backups, retention policy
+- **Monitoring** - Health checks, error tracking setup
+
+### Database Schema (Migration 0009)
+- `payment_intents` - Payment gateway transaction tracking
+- `payment_webhooks` - Webhook event logging
+- `otp_challenges` - OTP verification management
+- `session_events` - Session activity logging
+- Extended `users` table with 2FA fields
+- Performance indexes for all major queries
+
+### Manual E2E Test Script (Phase 9)
+1. Register new user with phone OTP verification
+2. Complete KYC and receive approval email
+3. Recharge wallet via bKash (sandbox test)
+4. Invest in a business and receive receipt email
+5. Post an update and receive notification
+6. Request withdrawal with OTP verification
+7. Admin approves withdrawal and user receives SMS
+8. Verify all audit logs captured correctly
 
 ---
 

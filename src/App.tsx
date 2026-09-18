@@ -20,6 +20,15 @@ import { FeedPage } from './pages/FeedPage';
 import { SearchPage } from './pages/SearchPage';
 import { FounderProfilePage } from './pages/FounderProfilePage';
 
+// Legal Pages
+import { TermsPage } from './pages/legal/TermsPage';
+import { PrivacyPage } from './pages/legal/PrivacyPage';
+import { RiskPage } from './pages/legal/RiskPage';
+import { RefundPage } from './pages/legal/RefundPage';
+import { CookiesPage } from './pages/legal/CookiesPage';
+import { AmlPage } from './pages/legal/AmlPage';
+import { GrievancePage } from './pages/legal/GrievancePage';
+
 // App Pages
 import { DashboardPage } from './pages/DashboardPage';
 import { PortfolioPage } from './pages/PortfolioPage';
@@ -147,6 +156,15 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/onboarding" element={<OnboardingPage />} />
+          
+          {/* Legal routes */}
+          <Route path="/legal/terms" element={<TermsPage />} />
+          <Route path="/legal/privacy" element={<PrivacyPage />} />
+          <Route path="/legal/risk" element={<RiskPage />} />
+          <Route path="/legal/refund" element={<RefundPage />} />
+          <Route path="/legal/cookies" element={<CookiesPage />} />
+          <Route path="/legal/aml" element={<AmlPage />} />
+          <Route path="/legal/grievance" element={<GrievancePage />} />
         </Route>
 
         {/* Authenticated user routes */}
