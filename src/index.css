@@ -1,0 +1,122 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-bg: #0a0e13;
+  --color-brand-panel: #121a23;
+  --color-brand-panel2: #18222e;
+  --color-brand-line: #233040;
+  --color-brand-text: #e8eef6;
+  --color-brand-muted: #8ba0b6;
+  --color-brand-accent: #00d09c;
+  --color-brand-accentD: #00a87d;
+  --color-brand-blue: #3b82f6;
+  --color-brand-warn: #f5b942;
+  --color-brand-bad: #f0525f;
+  --font-sans: 'Inter', 'Noto Sans Bengali', system-ui, sans-serif;
+  --radius-xl: 14px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: radial-gradient(ellipse at top, #121a23 0%, #0a0e13 70%);
+  color: #e8eef6;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+input, select, textarea {
+  background: #121a23;
+  border: 1px solid #233040;
+  border-radius: 10px;
+  padding: 10px 14px;
+  color: #e8eef6;
+  font-size: 15px;
+  width: 100%;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: #00d09c;
+  box-shadow: 0 0 0 3px rgba(0, 208, 156, 0.15);
+}
+
+input::placeholder {
+  color: #8ba0b6;
+}
+
+.btn-primary {
+  background: #00d09c;
+  color: #0a0e13;
+  font-weight: 600;
+  padding: 12px 24px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+  font-size: 15px;
+}
+
+.btn-primary:hover {
+  background: #00a87d;
+}
+
+.btn-primary:active {
+  transform: scale(0.98);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: #e8eef6;
+  font-weight: 500;
+  padding: 10px 20px;
+  border-radius: 10px;
+  border: 1px solid #233040;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+  font-size: 14px;
+}
+
+.btn-ghost:hover {
+  border-color: #00d09c;
+  background: rgba(0, 208, 156, 0.05);
+}
+
+.card {
+  background: #121a23;
+  border: 1px solid #233040;
+  border-radius: 14px;
+  padding: 20px;
+}
+
+.shimmer {
+  background: linear-gradient(90deg, #121a23 25%, #18222e 50%, #121a23 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 8px;
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #0a0e13;
+}
+::-webkit-scrollbar-thumb {
+  background: #233040;
+  border-radius: 3px;
+}
