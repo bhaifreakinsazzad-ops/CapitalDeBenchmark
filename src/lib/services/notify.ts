@@ -82,6 +82,17 @@ export const NOTIFICATION_TYPES = {
   KYC_SUBMITTED: 'kyc_submitted',
   KYC_APPROVED: 'kyc_approved',
   KYC_REJECTED: 'kyc_rejected',
+  BUSINESS_PENDING: 'business_pending',
+  BUSINESS_VERIFIED: 'business_verified',
+  BUSINESS_REJECTED: 'business_rejected',
+  BUSINESS_SUSPENDED: 'business_suspended',
+  BUSINESS_REACTIVATED: 'business_reactivated',
+  TRUST_SCORE_ADJUSTED: 'trust_score_adjusted',
+  UPDATE_PENDING: 'update_pending',
+  UPDATE_APPROVED: 'update_approved',
+  UPDATE_REJECTED: 'update_rejected',
+  NEW_UPDATE: 'new_update',
+  NEW_FOLLOWER: 'new_follower',
 } as const;
 
 // Helper function to create notifications

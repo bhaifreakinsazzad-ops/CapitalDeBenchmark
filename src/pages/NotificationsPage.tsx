@@ -66,6 +66,61 @@ export function NotificationsPage() {
         en: `KYC rejected: ${payload.reason}`,
         icon: '❌',
       },
+      business_pending: {
+        bn: `নতুন ব্যবসা যাচাইকরণের জন্য: ${payload.business_name}`,
+        en: `New business pending verification: ${payload.business_name}`,
+        icon: '🏢',
+      },
+      business_verified: {
+        bn: `${payload.business_name} যাচাইকৃত হয়েছে এবং এখন সক্রিয়`,
+        en: `${payload.business_name} has been verified and is now active`,
+        icon: '✅',
+      },
+      business_rejected: {
+        bn: `${payload.business_name} প্রত্যাখ্যাত: ${payload.reason}`,
+        en: `${payload.business_name} rejected: ${payload.reason}`,
+        icon: '❌',
+      },
+      business_suspended: {
+        bn: `${payload.business_name} স্থগিত: ${payload.reason}`,
+        en: `${payload.business_name} suspended: ${payload.reason}`,
+        icon: '⚠️',
+      },
+      business_reactivated: {
+        bn: `${payload.business_name} পুনরায় সক্রিয় করা হয়েছে`,
+        en: `${payload.business_name} has been reactivated`,
+        icon: '✅',
+      },
+      trust_score_adjusted: {
+        bn: `${payload.business_name} ট্রাস্ট স্কোর পরিবর্তিত: ${payload.new_score} (${payload.reason})`,
+        en: `${payload.business_name} trust score adjusted: ${payload.new_score} (${payload.reason})`,
+        icon: '📊',
+      },
+      update_pending: {
+        bn: `নতুন আপডেট অনুমোদনের জন্য: ${payload.business_name}`,
+        en: `New update pending approval: ${payload.business_name}`,
+        icon: '📝',
+      },
+      update_approved: {
+        bn: `আপনার আপডেট "${payload.update_title}" অনুমোদিত হয়েছে`,
+        en: `Your update "${payload.update_title}" has been approved`,
+        icon: '✅',
+      },
+      update_rejected: {
+        bn: `আপনার আপডেট "${payload.update_title}" প্রত্যাখ্যাত: ${payload.reason}`,
+        en: `Your update "${payload.update_title}" rejected: ${payload.reason}`,
+        icon: '❌',
+      },
+      new_update: {
+        bn: `${payload.business_name} নতুন আপডেট posted: ${payload.update_title}`,
+        en: `${payload.business_name} posted a new update: ${payload.update_title}`,
+        icon: '📢',
+      },
+      new_follower: {
+        bn: `নতুন ফলোয়ার`,
+        en: `New follower`,
+        icon: '👥',
+      },
     };
 
     return contents[type] || { bn: type, en: type, icon: '🔔' };

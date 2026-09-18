@@ -12,8 +12,10 @@ import { LandingPage } from './pages/LandingPage';
 import { LoginPage } from './pages/LoginPage';
 import { RegisterPage } from './pages/RegisterPage';
 import { OnboardingPage } from './pages/OnboardingPage';
-import { MarketPage, BusinessDetailPage } from './pages/MarketPage';
+import { MarketPage } from './pages/MarketPage';
+import { BusinessDetailPage } from './pages/BusinessDetailPage';
 import { LearnPage } from './pages/LearnPage';
+import { FeedPage } from './pages/FeedPage';
 
 // App Pages
 import { DashboardPage } from './pages/DashboardPage';
@@ -23,6 +25,9 @@ import { RechargePage } from './pages/wallet/RechargePage';
 import { WithdrawPage } from './pages/wallet/WithdrawPage';
 import { KycPage } from './pages/wallet/KycPage';
 import { MyBizPage } from './pages/MyBizPage';
+import { NewBusinessPage } from './pages/mybiz/NewBusinessPage';
+import { ManageBusinessPage } from './pages/mybiz/ManageBusinessPage';
+import { PostUpdatePage } from './pages/mybiz/PostUpdatePage';
 import { NotificationsPage } from './pages/NotificationsPage';
 
 // Admin Pages
@@ -82,7 +87,6 @@ function AdminLayout() {
     <div className="min-h-screen flex">
       <AdminSidebar />
       <div className="flex-1 flex flex-col">
-        {/* Mobile admin header */}
         <header className="md:hidden sticky top-0 z-50 bg-brand-bg/90 backdrop-blur-md border-b border-brand-line px-4 h-14 flex items-center">
           <div>
             <p className="text-sm font-bold text-brand-text">Capital De Benchmark</p>
@@ -97,7 +101,6 @@ function AdminLayout() {
   );
 }
 
-// Public layout (no auth required)
 function PublicLayout() {
   return <Outlet />;
 }
@@ -110,8 +113,9 @@ function App() {
         <Route element={<PublicLayout />}>
           <Route path="/" element={<LandingPage />} />
           <Route path="/market" element={<MarketPage />} />
-          <Route path="/biz/:id" element={<BusinessDetailPage />} />
+          <Route path="/biz/:slug" element={<BusinessDetailPage />} />
           <Route path="/learn" element={<LearnPage />} />
+          <Route path="/feed" element={<FeedPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/onboarding" element={<OnboardingPage />} />
@@ -126,6 +130,9 @@ function App() {
           <Route path="/wallet/withdraw" element={<WithdrawPage />} />
           <Route path="/wallet/kyc" element={<KycPage />} />
           <Route path="/mybiz" element={<MyBizPage />} />
+          <Route path="/mybiz/new" element={<NewBusinessPage />} />
+          <Route path="/mybiz/:id" element={<ManageBusinessPage />} />
+          <Route path="/mybiz/:id/updates/new" element={<PostUpdatePage />} />
           <Route path="/notifications" element={<NotificationsPage />} />
         </Route>
 
@@ -141,7 +148,6 @@ function App() {
           <Route path="/admin/audit" element={<AdminAuditPage />} />
         </Route>
 
-        {/* Catch all */}
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>

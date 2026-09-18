@@ -12,7 +12,7 @@ export function BottomNav() {
     { to: '/market', icon: Store, label: t.nav.market },
     { to: '/portfolio', icon: Briefcase, label: t.nav.portfolio },
     { to: '/wallet', icon: Wallet, label: t.nav.wallet },
-    { to: '/notifications', icon: Newspaper, label: t.nav.updates },
+    { to: '/feed', icon: Newspaper, label: t.nav.updates },
     { to: '/dashboard', icon: User, label: t.nav.profile },
   ];
 

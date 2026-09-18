@@ -94,13 +94,77 @@ supabase/
 |-------|-------------|
 | 1 | Foundation — Schema, auth, roles, design system, stub pages ✅ |
 | 2 | Wallet, KYC, Recharge, Withdrawals ✅ |
-| 3 | Business Listing — Founders create businesses, admin verifies |
+| 3 | Business Listing, Market, Verification, Updates ✅ |
 | 4 | Investment Flow — Buy shares, create receipts, update holdings |
 | 5 | Trading Exchange — Order book, matching engine, tradable receipts |
 | 6 | Advanced KYC — Enhanced verification, compliance |
-| 7 | Updates & Social — Founder posts, comments, notifications |
-| 8 | Admin Operations — Full admin dashboard enhancements |
-| 9 | Launch Polish — PWA, performance, analytics, legal pages |
+| 7 | Comments & Social — Update comments, interactions |
+| 8 | Admin Operations — Ads, reports, advanced analytics |
+| 9 | Launch Polish — PWA, performance, legal pages |
+
+## Phase 3 Features
+
+### Business Listing
+- Founders upgrade from investor role (requires KYC verification)
+- Multi-step business creation form (5 steps)
+- Required documents: NID front/back, trade license, utility bill
+- 2-12 photos with cover photo selection
+- Business status lifecycle: pending → active/rejected → suspended
+
+### Public Market
+- Browse all verified (active) businesses
+- Search by name or location
+- Filter by category
+- Sort by newest, trust score, funding progress, price
+- Business cards show cover photo, verification badge, trust score, followers
+
+### Business Detail Page
+- Hero with verification badge and trust score
+- Founder's story
+- Financial stats (share price, shares sold, raised, revenue)
+- Funding mode explainer (instant vs milestone)
+- Verification summary (document count, not images)
+- Photo gallery with tap-to-expand
+- Updates feed (approved updates only)
+- Follow button with real-time count
+
+### Updates System
+- Founders post updates for active businesses
+- Updates go through admin approval queue
+- Approved updates appear on business page and global feed
+- Trust score adjusts: +1 for approval, -1 for rejection (capped per 24h)
+
+### Admin Verification
+- Business verification queue with document viewer
+- Approve/reject with reason (min 10 chars for rejection)
+- Trust score +10 on verification
+- Suspend/reactivate businesses with reason
+- Manual trust score adjustment (-50 to +50)
+
+### Follows
+- Users follow businesses
+- Real-time follower count updates
+- Followed businesses notify followers of new updates
+
+### Trust Score Algorithm
+- Starts at 50 for new businesses
+- +10 on verification (complete docs)
+- +1 on update approval (max +1 per 24h)
+- -1 on update rejection (max -3 per 24h)
+- -5 on suspension
+- Full audit trail in trust_score_events table
+
+### Manual E2E Test Script (Phase 3)
+1. Log in as KYC-verified investor
+2. Go to /mybiz → upgrade to founder
+3. Click "List New Business" → complete 5-step form
+4. Log in as admin → see business in /admin/verify → approve
+5. Log in as founder → see status 'active' → post an update
+6. Log in as admin → approve the update in /admin/updates
+7. Log out → visit /market → see the business → open detail page
+8. Follow the business (as another user)
+9. Visit /feed → see the approved update
+10. Verify followers_count and trust_score events logged correctly
 
 ## Phase 2 Features
 
