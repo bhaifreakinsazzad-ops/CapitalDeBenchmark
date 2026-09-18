@@ -53,6 +53,10 @@ export interface Business {
   followers_count: number;
   last_update_at?: string;
   funding_option_shown: boolean;
+  escrow_balance: number;
+  total_raised: number;
+  milestone_reached_at?: string;
+  refunded_at?: string;
   created_at: string;
   updated_at: string;
 }
@@ -226,6 +230,8 @@ export const useBusinessStore = create<BusinessStore>()(
           views_count: 0,
           followers_count: 0,
           funding_option_shown: false,
+          escrow_balance: 0,
+          total_raised: 0,
           created_at: now,
           updated_at: now,
         };

@@ -93,6 +93,12 @@ export const NOTIFICATION_TYPES = {
   UPDATE_REJECTED: 'update_rejected',
   NEW_UPDATE: 'new_update',
   NEW_FOLLOWER: 'new_follower',
+  NEW_INVESTMENT: 'new_investment',
+  INVESTMENT_REFUNDED: 'investment_refunded',
+  FUND_RELEASE_PENDING: 'fund_release_pending',
+  FUND_RELEASE_APPROVED: 'fund_release_approved',
+  FUND_RELEASE_PAID: 'fund_release_paid',
+  FUND_RELEASE_REJECTED: 'fund_release_rejected',
 } as const;
 
 // Helper function to create notifications
