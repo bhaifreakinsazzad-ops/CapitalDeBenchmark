@@ -648,7 +648,7 @@ Currently paused for improvements, Online New Market is preparing for a powerful
 export function initializeFreakinStudio() {
   console.log('🚀 Initializing Freakin Studio Venture Ecosystem...');
 
-  // Step 1: Create founder account
+  // Step 1: Create founder account and log in
   const demoStore = useDemoStore.getState();
   const existingFounder = demoStore.findByPhone(FREAKIN_FOUNDER.phone);
   
@@ -658,6 +658,25 @@ export function initializeFreakinStudio() {
   } else {
     console.log('ℹ️ Founder account already exists');
   }
+
+  // Log in as the founder so createBusiness works
+  const { login } = useAuthStore.getState();
+  login({
+    id: FREAKIN_FOUNDER.id,
+    name: FREAKIN_FOUNDER.name,
+    phone: FREAKIN_FOUNDER.phone,
+    email: FREAKIN_FOUNDER.email,
+    role: FREAKIN_FOUNDER.role,
+    kyc_status: FREAKIN_FOUNDER.kyc_status,
+    kyc_docs: [],
+    wallet_id: FREAKIN_FOUNDER.wallet_id,
+    balance: FREAKIN_FOUNDER.balance,
+    preferred_lang: FREAKIN_FOUNDER.preferred_lang,
+    trust_flags: {},
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+  });
+  console.log('✅ Logged in as founder');
 
   // Step 2: Create all ventures
   const businessStore = useBusinessStore.getState();

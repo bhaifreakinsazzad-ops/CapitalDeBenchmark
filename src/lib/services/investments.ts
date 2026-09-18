@@ -40,7 +40,7 @@ interface InvestmentStore {
   fundReleaseRequests: FundReleaseRequest[];
 
   // Investor actions
-      investInBusiness: (data: {
+  investInBusiness: (data: {
     business_id: string;
     shares: number;
   }) => { success: boolean; error?: string; investment_id?: string };
@@ -92,17 +92,28 @@ export const useInvestmentStore = create<InvestmentStore>()(
           return { success: false, error: 'Insufficient wallet balance' };
         }
 
-        // Debit wallet
-        const walletStore = useWalletStore.getState();
-        const debitResult = walletStore.submitWithdrawal({
-          amount: totalAmount,
-          mfs_method: 'bkash', // Internal transfer
-          mfs_number: '00000000000', // Platform account
-        });
+        // Debit wallet directly for investment (internal transfer)
+        const txnHash = `0x${Math.random().toString(16).substr(2, 64)}`;
+        const txnId = generateId();
+        const newBalance = user.balance - totalAmount;
 
-        if (!debitResult.success) {
-          return { success: false, error: 'Wallet debit failed' };
-        }
+        // Update user balance
+        useAuthStore.getState().updateUser({ balance: newBalance });
+
+        // Create wallet transaction
+        useWalletStore.setState((state) => ({
+          walletTxns: [{
+            id: txnId,
+            user_id: user.id,
+            type: 'investment',
+            amount: -totalAmount,
+            balance_after: newBalance,
+            hash: txnHash,
+            status: 'completed',
+            note: `Investment in ${business.name} (${data.shares} shares)`,
+            created_at: new Date().toISOString(),
+          }, ...state.walletTxns],
+        }));
 
         // Determine status based on funding mode
         const status = business.funding_mode === 'instant' ? 'active' : 'escrowed';
@@ -115,7 +126,7 @@ export const useInvestmentStore = create<InvestmentStore>()(
           shares: data.shares,
           price_per_share: business.share_price,
           total_amount: totalAmount,
-          wallet_txn_id: debitResult.request_id,
+          wallet_txn_id: txnId,
           status,
           created_at: new Date().toISOString(),
         };
