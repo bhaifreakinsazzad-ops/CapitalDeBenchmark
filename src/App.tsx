@@ -15,7 +15,15 @@ import { RegisterPage } from './pages/RegisterPage';
 import { OnboardingPage } from './pages/OnboardingPage';
 import { MarketPage } from './pages/MarketPage';
 import { BusinessDetailPage } from './pages/BusinessDetailPage';
-import { LearnPage } from './pages/LearnPage';
+import { LearnIndexPage } from './pages/learn/LearnIndexPage';
+import { WhatIsMicroInvestingPage } from './pages/learn/WhatIsMicroInvestingPage';
+import { HowToStartPage } from './pages/learn/HowToStartPage';
+import { UnderstandingSharesPage } from './pages/learn/UnderstandingSharesPage';
+import { HowPricesMovePage } from './pages/learn/HowPricesMovePage';
+import { RisksAndRightsPage } from './pages/learn/RisksAndRightsPage';
+import { WalletAndEscrowPage } from './pages/learn/WalletAndEscrowPage';
+import { GlossaryPage } from './pages/learn/GlossaryPage';
+import { FAQPage } from './pages/learn/FAQPage';
 import { FeedPage } from './pages/FeedPage';
 import { SearchPage } from './pages/SearchPage';
 import { FounderProfilePage } from './pages/FounderProfilePage';
@@ -149,7 +157,15 @@ function App() {
           <Route path="/" element={<LandingPage />} />
           <Route path="/market" element={<MarketPage />} />
           <Route path="/biz/:slug" element={<BusinessDetailPage />} />
-          <Route path="/learn" element={<LearnPage />} />
+          <Route path="/learn" element={<LearnIndexPage />} />
+          <Route path="/learn/what-is-micro-investing" element={<WhatIsMicroInvestingPage />} />
+          <Route path="/learn/how-to-start" element={<HowToStartPage />} />
+          <Route path="/learn/understanding-shares" element={<UnderstandingSharesPage />} />
+          <Route path="/learn/how-prices-move" element={<HowPricesMovePage />} />
+          <Route path="/learn/risks-and-rights" element={<RisksAndRightsPage />} />
+          <Route path="/learn/wallet-and-escrow" element={<WalletAndEscrowPage />} />
+          <Route path="/learn/glossary" element={<GlossaryPage />} />
+          <Route path="/learn/faq" element={<FAQPage />} />
           <Route path="/feed" element={<FeedPage />} />
           <Route path="/search" element={<SearchPage />} />
           <Route path="/founder/:id" element={<FounderProfilePage />} />

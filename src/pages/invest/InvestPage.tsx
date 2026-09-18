@@ -18,6 +18,7 @@ export function InvestPage() {
   const [shares, setShares] = useState(1);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
+  const [riskAccepted, setRiskAccepted] = useState(false);
 
   if (!user) {
     navigate('/login');
@@ -57,6 +58,10 @@ export function InvestPage() {
     }
     if (!canAfford) {
       setError(isBn ? 'অপর্যাপ্ত ব্যালেন্স' : 'Insufficient balance');
+      return;
+    }
+    if (!riskAccepted) {
+      setError(isBn ? 'ঝুঁকি প্রকাশ পড়েছেন এবং মেনে নিয়েছেন তা নিশ্চিত করুন' : 'Please confirm you have read and accepted the risk disclosure');
       return;
     }
 
@@ -181,9 +186,32 @@ export function InvestPage() {
         </p>
       </div>
 
+      {/* Risk acknowledgment */}
+      <div className="bg-brand-warn/10 border border-brand-warn/20 rounded-xl p-4 mb-6">
+        <label className="flex items-start gap-3 cursor-pointer">
+          <input 
+            type="checkbox" 
+            checked={riskAccepted}
+            onChange={(e) => setRiskAccepted(e.target.checked)}
+            className="mt-1 w-4 h-4 accent-brand-accent"
+          />
+          <span className="text-sm text-brand-muted">
+            {isBn ? (
+              <>
+                আমি <a href="/legal/risk" target="_blank" className="text-brand-accent hover:underline">ঝুঁকি প্রকাশ</a> পড়েছি এবং বিনিয়োগের ঝুঁকি বুঝি। আমি জানি যে আমি আমার বিনিয়োগকৃত টাকা হারাতে পারি।
+              </>
+            ) : (
+              <>
+                I have read the <a href="/legal/risk" target="_blank" className="text-brand-accent hover:underline">Risk Disclosure</a> and understand the risks of investing. I acknowledge that I may lose my invested money.
+              </>
+            )}
+          </span>
+        </label>
+      </div>
+
       <button
         onClick={handleInvest}
-        disabled={!canAfford || shares > sharesAvailable}
+        disabled={!canAfford || shares > sharesAvailable || !riskAccepted}
         className="btn-primary w-full disabled:opacity-50 disabled:cursor-not-allowed"
       >
         {isBn ? 'বিনিয়োগ নিশ্চিত করুন' : 'Confirm Investment'}

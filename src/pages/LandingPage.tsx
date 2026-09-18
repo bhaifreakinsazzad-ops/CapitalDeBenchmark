@@ -126,14 +126,50 @@ export function LandingPage() {
 
       {/* Footer */}
       <footer className="border-t border-brand-line py-8">
-        <div className="max-w-6xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4">
-          <BrandMark size="sm" />
-          <p className="text-xs text-brand-muted text-center">
-            © 2025 {APP_FULL_NAME}. {isBn ? 'সর্বস্বত্ব সংরক্ষিত।' : 'All rights reserved.'}
-          </p>
-          <div className="flex gap-4 text-xs text-brand-muted">
-            <Link to="/learn" className="hover:text-brand-text transition-colors">{isBn ? 'শিখুন' : 'Learn'}</Link>
-            <Link to="/market" className="hover:text-brand-text transition-colors">{isBn ? 'বাজার' : 'Market'}</Link>
+        <div className="max-w-6xl mx-auto px-4">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4 mb-6">
+            <BrandMark size="sm" />
+            <p className="text-xs text-brand-muted text-center">
+              © 2025 {APP_FULL_NAME}. {isBn ? 'সর্বস্বত্ব সংরক্ষিত।' : 'All rights reserved.'}
+            </p>
+          </div>
+          
+          {/* Legal Links */}
+          <div className="border-t border-brand-line pt-6">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-xs text-brand-muted">
+              <div>
+                <h4 className="font-semibold text-brand-text mb-2">{isBn ? 'আইনি' : 'Legal'}</h4>
+                <div className="space-y-2">
+                  <Link to="/legal/terms" className="block hover:text-brand-text transition-colors">{isBn ? 'সেবার শর্তাবলী' : 'Terms of Service'}</Link>
+                  <Link to="/legal/privacy" className="block hover:text-brand-text transition-colors">{isBn ? 'গোপনীয়তা নীতি' : 'Privacy Policy'}</Link>
+                  <Link to="/legal/risk" className="block hover:text-brand-text transition-colors">{isBn ? 'ঝুঁকি প্রকাশ' : 'Risk Disclosure'}</Link>
+                </div>
+              </div>
+              <div>
+                <h4 className="font-semibold text-brand-text mb-2">{isBn ? 'নীতিমালা' : 'Policies'}</h4>
+                <div className="space-y-2">
+                  <Link to="/legal/refund" className="block hover:text-brand-text transition-colors">{isBn ? 'ফেরত নীতি' : 'Refund Policy'}</Link>
+                  <Link to="/legal/cookies" className="block hover:text-brand-text transition-colors">{isBn ? 'কুকি নীতি' : 'Cookie Policy'}</Link>
+                  <Link to="/legal/aml" className="block hover:text-brand-text transition-colors">{isBn ? 'AML/KYC নীতি' : 'AML/KYC Policy'}</Link>
+                </div>
+              </div>
+              <div>
+                <h4 className="font-semibold text-brand-text mb-2">{isBn ? 'সাহায্য' : 'Support'}</h4>
+                <div className="space-y-2">
+                  <Link to="/legal/grievance" className="block hover:text-brand-text transition-colors">{isBn ? 'অভিযোগ প্রতিকার' : 'Grievance Redressal'}</Link>
+                  <Link to="/learn" className="block hover:text-brand-text transition-colors">{isBn ? 'শিখুন' : 'Learn'}</Link>
+                  <Link to="/market" className="block hover:text-brand-text transition-colors">{isBn ? 'বাজার' : 'Market'}</Link>
+                </div>
+              </div>
+              <div>
+                <h4 className="font-semibold text-brand-text mb-2">{isBn ? 'যোগাযোগ' : 'Contact'}</h4>
+                <div className="space-y-2">
+                  <a href="mailto:support@capitaldebenchmark.com" className="block hover:text-brand-text transition-colors">support@capitaldebenchmark.com</a>
+                  <p className="text-brand-muted">{isBn ? 'সাপোর্ট লাইন' : 'Support Line'}</p>
+                  <p className="text-brand-muted">+880-XXX-XXXXXXX</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </footer>

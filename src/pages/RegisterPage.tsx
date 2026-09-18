@@ -167,6 +167,27 @@ export function RegisterPage() {
               </div>
             </div>
 
+            <div className="bg-brand-panel2 border border-brand-line rounded-xl p-4">
+              <label className="flex items-start gap-3 cursor-pointer">
+                <input 
+                  type="checkbox" 
+                  required 
+                  className="mt-1 w-4 h-4 accent-brand-accent"
+                />
+                <span className="text-sm text-brand-muted">
+                  {isBn ? (
+                    <>
+                      আমি <Link to="/legal/terms" className="text-brand-accent hover:underline" target="_blank">সেবার শর্তাবলী</Link> তে সম্মত এবং <Link to="/legal/risk" className="text-brand-accent hover:underline" target="_blank">ঝুঁকি প্রকাশ</Link> স্বীকার করছি।
+                    </>
+                  ) : (
+                    <>
+                      I agree to the <Link to="/legal/terms" className="text-brand-accent hover:underline" target="_blank">Terms of Service</Link> and acknowledge the <Link to="/legal/risk" className="text-brand-accent hover:underline" target="_blank">Risk Disclosure</Link>.
+                    </>
+                  )}
+                </span>
+              </label>
+            </div>
+
             <button type="submit" disabled={isSubmitting} className="btn-primary w-full">
               {isSubmitting ? (isBn ? 'লোড হচ্ছে...' : 'Loading...') : (isBn ? 'রেজিস্টার করুন' : 'Register')}
             </button>
